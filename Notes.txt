@@ -1,0 +1,61 @@
+What is Flutter?
+- https://flutter.dev/
+- Google's cross-platform mobile development framework
+- UI Toolkit
+
+What is Dart?
+- https://dart.dev/
+- Flutter programming language
+- UI First
+- Like a mix of TypeScript and Java/C#
+- Clean
+
+Why Flutter?
+- Easy to setup
+- Cross platform
+- UI first - Apps look the same across devices
+- Great Documentation
+- Always being worked on
+- Experience is same across Windows and MacOS
+- Hotreload works
+
+BLOC
+- Business Logic Components
+- Everything is a stream of events, Widgets (elements) send events and other widges respond, bloc handles the back and forth
+- A little like MVC/MVVM
+- Built into Dart but Bloc Library makes it a little easier
+
+Flutter setup
+- Follow instructions here: https://flutter.dev/docs/get-started/install
+- Reccomend to place in C:/Flutter (long file names cause issues that aren't clear)
+- Install Android SDK (Visual Studio Xamarin or Android Studio)
+- Create Android Emulator (Visual Studio or Android Studio)
+- If using Visual Studio set android-sdk and java jdk Path under Env Variables to ANDROID_SDK_ROOT and JAVA_HOME
+- Run "flutter doctor" from cmd and fix errors
+- Create a new folder and open VS code pointed at that folder
+- Install Flutter VS Code Extension
+- Install Bloc VS Code Extension
+- From VS Code under the command pallete (ctrl + shift + p) find Flutter:New Project
+
+Flutter Project Setup
+- Remove all code from demo file except 
+void main() {
+  runApp(MyApp());
+}
+- Change MyApp to App
+- Create folder structure -
+    - lib
+        - main.dart (Starting file, used to call app.dart)
+        -src
+            -app.dart (Main page of app, setup navigation here)
+            -assets (Holds images and fonts etc.)
+            -blocs (Holds your blocs)
+            -helpers (Constants etc.)
+            -models (Models)
+            -pages (Pages)
+            -repositories (repositories)
+            -widgets (Holds reusable widgets)
+- Json_serializable package - Makes data handling much easier, adds some bulk
+- bloc and fluter_bloc packages
+
+
