@@ -19,7 +19,18 @@ class _TodoListState extends State<TodoList> {
       ),
       body: BlocProvider(
           create: (context) => TodoBloc(),
-          child: BlocBuilder<TodoBloc, TodoState>(
+          child: BlocConsumer<TodoBloc, TodoState>(
+            listener: (context, state) {
+              if (state is ItemComplete) {
+                final scaffold = Scaffold.of(context);
+                scaffold.showSnackBar(
+                  SnackBar(
+                    content: Text('Item completed'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              }
+            },
             builder: (context, state) {
               if (state is TodoInitial) {
                 BlocProvider.of<TodoBloc>(context).add(GetItems());

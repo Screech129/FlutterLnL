@@ -58,4 +58,6 @@ void main() {
 - Json_serializable package - Makes data handling much easier, adds some bulk
 - bloc and fluter_bloc packages
 
+Slideshow: https://deckdeckgo.com/editor/1L9bZQ3idDEN2i98RwsM 
+
 
