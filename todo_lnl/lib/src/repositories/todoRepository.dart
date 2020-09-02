@@ -4,19 +4,53 @@ class TodoRepository {
   List<TodoItem> items = List<TodoItem>();
 
   TodoRepository() {
-    items.add(new TodoItem(false, "0", "Extra Stuff", "Item1"));
-    items.add(new TodoItem(false, "1", "More Extra Stuff", "Item2"));
-    items.add(new TodoItem(false, "2", "Stuff", "Item3"));
-    items.add(new TodoItem(false, "3", "Extra Things and Stuff", "Item4"));
-    items.add(new TodoItem(false, "4", "Extra", "Item5"));
+    items.add(new TodoItem(
+      complete: false,
+      id: "0",
+      note: "Extra Stuff",
+      task: "Item1",
+    ));
+    items.add(new TodoItem(
+      complete: false,
+      id: "1",
+      note: "More Extra Stuff",
+      task: "Item2",
+    ));
+    items.add(new TodoItem(
+      complete: false,
+      id: "2",
+      note: "Stuff",
+      task: "Item3",
+    ));
+    items.add(new TodoItem(
+      complete: false,
+      id: "3",
+      note: "Extra Things and Stuff",
+      task: "Item4",
+    ));
+    items.add(new TodoItem(
+      complete: false,
+      id: "4",
+      note: "Extra",
+      task: "Item5",
+    ));
   }
 
-  List<TodoItem> getItems() {
+  Future<List<TodoItem>> getItems() async {
     return items;
   }
 
   void completeItem(String itemId) {
     items.firstWhere((i) => i.id == itemId).complete = true;
+  }
+
+  void addItem(TodoItem item) {
+    items.add(item);
+  }
+
+  String getHighestId() {
+    items.sort((a, b) => a.id.compareTo(b.id));
+    return items.last.id;
   }
 }
 

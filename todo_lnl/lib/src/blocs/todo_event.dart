@@ -14,3 +14,9 @@ class CompleteItem extends TodoEvent {
 class DeleteItem extends TodoEvent {}
 
 class RefreshItems extends TodoEvent {}
+
+class AddItemToList extends TodoEvent {
+  final TodoItem item;
+
+  AddItemToList(this.item);
+}

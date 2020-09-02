@@ -18,17 +18,26 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   ) async* {
     if (event is GetItems) {
       yield ItemsLoading();
-      var items =
-          repository.getItems().where((item) => !item.complete).toList();
+      var itemsFuture = await repository.getItems();
+      var items = itemsFuture.where((item) => !item.complete).toList();
       yield ItemsLoaded(items);
     }
 
     if (event is CompleteItem) {
       yield ItemComplete();
       repository.completeItem(event.selectedItem.id);
-      var items =
-          repository.getItems().where((item) => !item.complete).toList();
+      var itemsFuture = await repository.getItems();
+      var items = itemsFuture.where((item) => !item.complete).toList();
       yield ItemsLoaded(items);
+    }
+
+    if (event is AddItemToList) {
+      var item = event.item;
+      var maxId = repository.getHighestId();
+      item.id = (int.parse(maxId) + 1).toString();
+      item.complete = false;
+      repository.addItem(item);
+      yield ItemAdded();
     }
   }
 }

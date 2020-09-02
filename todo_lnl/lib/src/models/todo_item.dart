@@ -9,7 +9,7 @@ class TodoItem {
   String note;
   String task;
 
-  TodoItem(this.complete, this.id, this.note, this.task);
+  TodoItem({this.complete, this.id, this.note, this.task});
 
   factory TodoItem.fromJson(Map<String, dynamic> json) =>
       _$TodoItemFromJson(json);

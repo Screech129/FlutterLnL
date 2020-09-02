@@ -8,10 +8,10 @@ part of 'todo_item.dart';
 
 TodoItem _$TodoItemFromJson(Map<String, dynamic> json) {
   return TodoItem(
-    json['complete'] as bool,
-    json['id'] as String,
-    json['note'] as String,
-    json['task'] as String,
+    complete: json['complete'] as bool,
+    id: json['id'] as String,
+    note: json['note'] as String,
+    task: json['task'] as String,
   );
 }
 

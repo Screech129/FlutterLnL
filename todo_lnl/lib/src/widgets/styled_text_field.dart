@@ -9,8 +9,8 @@ class StyledTextField extends StatefulWidget {
   const StyledTextField({
     Key key,
     this.label,
-    this.value,
-    this.errorMessage,
+    this.value = '',
+    this.errorMessage = '',
     this.onTextChanged,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class StyledTextField extends StatefulWidget {
 class _StyledTextFieldState extends State<StyledTextField> {
   TextEditingController controller = TextEditingController();
   bool hasError;
-  var _errorText;
+  var _errorText = '';
   @override
   void initState() {
     controller.text = widget.value;
@@ -48,15 +48,15 @@ class _StyledTextFieldState extends State<StyledTextField> {
           child: TextField(
             controller: controller,
             onChanged: (value) {
-              widget.onTextChanged(value);
               setState(() {
                 if (widget.errorMessage.isNotEmpty && value.isEmpty) {
                   _errorText = '${widget.errorMessage}';
                   hasError = true;
                 } else {
-                  _errorText = null;
+                  _errorText = '';
                   hasError = false;
                 }
+                widget.onTextChanged(value, hasError);
               });
             },
             decoration: new InputDecoration(
@@ -88,4 +88,4 @@ class _StyledTextFieldState extends State<StyledTextField> {
   }
 }
 
-typedef TextChangedCallBack = void Function(String text);
+typedef TextChangedCallBack = void Function(String text, bool hasError);

@@ -16,3 +16,5 @@ class ItemsLoaded extends TodoState {
 class ItemDeleting extends TodoState {}
 
 class ItemComplete extends TodoState {}
+
+class ItemAdded extends TodoState {}

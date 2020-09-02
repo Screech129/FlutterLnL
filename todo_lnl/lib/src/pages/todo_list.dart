@@ -47,12 +47,17 @@ class _TodoListState extends State<TodoList> {
               if (state is ItemsLoaded) {
                 var items = state.items;
                 return Center(
-                  child: Container(
-                    child: ListView.builder(
-                        itemCount: items.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return buildListItems(context, index, items);
-                        }),
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      _refreshList(context);
+                    },
+                    child: Container(
+                      child: ListView.builder(
+                          itemCount: items.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return buildListItems(context, index, items);
+                          }),
+                    ),
                   ),
                 );
               } else {
@@ -66,16 +71,42 @@ class _TodoListState extends State<TodoList> {
   }
 
   Widget buildListItems(BuildContext context, int index, List<TodoItem> items) {
-    return GestureDetector(
-      onTap: () => {
+    return Dismissible(
+      direction: DismissDirection.startToEnd,
+      background: Container(
+        alignment: Alignment.centerLeft,
+        color: Colors.green,
+        margin: EdgeInsets.only(top: 10),
+        child: Container(
+          child: Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      key: Key(items[index].id),
+      onDismissed: (direction) {
         BlocProvider.of<TodoBloc>(context)
-            .add(CompleteItem(items, items[index])),
+            .add(CompleteItem(items, items[index]));
       },
       child: Container(
+        margin: EdgeInsets.only(top: 10),
         height: 50,
-        color: Colors.amber,
-        child: Center(child: Text(items[index].task)),
+        color: Colors.grey[300],
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(items[index].task),
+            Text("Notes: ${items[index].note}")
+          ],
+        )),
       ),
     );
+  }
+
+  Future<void> _refreshList(BuildContext context) async {
+    await Future.delayed(Duration(milliseconds: 1));
+    BlocProvider.of<TodoBloc>(context).add(GetItems());
   }
 }
