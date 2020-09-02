@@ -16,6 +16,15 @@ class _TodoListState extends State<TodoList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Todo List'),
+        leading: GestureDetector(
+          child: Center(
+            child: Text(
+              "+",
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
+          onTap: () => {Navigator.pushNamed(context, "Add")},
+        ),
       ),
       body: BlocProvider(
           create: (context) => TodoBloc(),

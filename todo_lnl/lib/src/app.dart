@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_lnl/src/pages/todoList.dart';
+import 'package:todo_lnl/src/pages/add_item.dart';
+import 'package:todo_lnl/src/pages/todo_list.dart';
 
 class App extends StatelessWidget {
   @override
@@ -10,7 +11,33 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoList(),
+      onGenerateRoute: _buildRoutes,
     );
+  }
+
+  Route _buildRoutes(RouteSettings settings) {
+    switch (settings.name) {
+      case "/":
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            return TodoList();
+          },
+        );
+        break;
+      case "Add":
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            return AddItem();
+          },
+        );
+        break;
+      default:
+        return MaterialPageRoute(
+          builder: (BuildContext context) {
+            return TodoList();
+          },
+        );
+        break;
+    }
   }
 }
