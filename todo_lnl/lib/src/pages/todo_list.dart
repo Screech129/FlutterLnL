@@ -14,17 +14,13 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {Navigator.pushNamed(context, "Add")},
+        child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).accentColor,
+      ),
       appBar: AppBar(
         title: Text('Todo List'),
-        leading: GestureDetector(
-          child: Center(
-            child: Text(
-              "+",
-              style: TextStyle(fontSize: 25),
-            ),
-          ),
-          onTap: () => {Navigator.pushNamed(context, "Add")},
-        ),
       ),
       body: BlocProvider(
           create: (context) => TodoBloc(),
